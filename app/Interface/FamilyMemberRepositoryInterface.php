@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Interface;
+
+interface FamilyMemberRepositoryInterface
+{
+    public function getAll(
+        ?string $search,
+        ?int $limit,
+        bool $excecute
+    );
+
+    public function getAllPaginate(
+        ?string $search,
+        ?int $rowPerPage
+    );
+
+    public function create(
+        array $data
+    );
+
+    public function getById(
+        string $id
+    );
+}

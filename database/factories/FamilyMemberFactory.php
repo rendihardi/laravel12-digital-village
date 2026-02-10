@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\HeadOFFamily>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FamilyMember>
  */
-class HeadOfFamilyFactory extends Factory
+class FamilyMemberFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,7 +16,7 @@ class HeadOfFamilyFactory extends Factory
      */
     public function definition(): array
     {
-        return [
+         return [
             'profile_picture' => $this->faker->imageUrl(),
             'identity_number' => $this->faker->unique()->numerify('#################'),
             'gender' => $this->faker->randomElement(['male', 'female']),
@@ -24,6 +24,7 @@ class HeadOfFamilyFactory extends Factory
             'phone_number' => $this->faker->unique()->phoneNumber(),
             'occupation' => $this->faker->jobTitle(),
             'marital_status' => $this->faker->randomElement(['single', 'married']),
+            'relation' => $this->faker->randomElement(['wife', 'child','husbaand']),
         ];
     }
 }

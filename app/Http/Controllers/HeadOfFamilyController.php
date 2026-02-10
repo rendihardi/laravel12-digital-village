@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseHelper;
-use App\Http\Requests\HeadOfFamilyRequest;
+use App\Http\Requests\HeadOfFamilyStoreRequest;
 use App\Http\Requests\HeadOfFamilyUpdateRequest;
 use App\Http\Resources\HeadOfFamilyResource;
 use App\Http\Resources\PaginateResource;
@@ -59,7 +59,7 @@ class HeadOfFamilyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(HeadOfFamilyRequest $request)
+    public function store(HeadOfFamilyStoreRequest $request)
     {
          $request = $request->validated();
         try {
