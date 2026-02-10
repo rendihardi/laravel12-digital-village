@@ -37,15 +37,15 @@ class UserStoreRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'required'=>'harus diisi',
-            'string'=>"atribut harus berupa string",
-            'max'=>'atribut makasimal :max karakter',
-            'min'=>'atribut minimal :min karakter',
-            'unique' => 'atribut harus unique',
-            'email' => 'harus berupa email',
-        ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         'required'=>':attribue harus diisi',
+    //         'string'=>":attribut harus berupa string",
+    //         'max'=>':attribut makasimal :max karakter',
+    //         'min'=>':attribut minimal :min karakter',
+    //         'unique' => ':attribut harus unique',
+    //         'email' => ':attribut harus berupa email',
+    //     ];
+    // }
 }

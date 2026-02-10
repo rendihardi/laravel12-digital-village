@@ -16,12 +16,12 @@ return new class extends Migration
             $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('profile_picture');
-            $table->integer('identity_number')->unique();
+            $table->string('identity_number')->unique();
             $table->enum('gender', ['male', 'female']);
             $table->date('date_of_birth');
             $table->string('phone_number');
             $table->string('occupation');
-            $table->enum('material_status', ['single', 'married']);
+            $table->enum('marital_status', ['single', 'married']);
             $table->softDeletes();
             $table->timestamps();
         });
