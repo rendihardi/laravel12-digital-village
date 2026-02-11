@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('social_asisstance_recipients', function (Blueprint $table) {
             $table->uuid()->primary();
             $table->uuid('social_asisstance_id');
-            $table->foreign('social_asisstance_id')->references('id')->on('social_asisstances');
+            $table->foreign('social_asisstance_id')->references('id')->on('social_assistances');
             $table->uuid('head_of_family_id');
             $table->foreign('head_of_family_id')->references('id')->on('head_of_families');
             $table->enum('bank',['bri','bni','bca','mandiri']);

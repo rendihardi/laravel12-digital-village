@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Interface;
+namespace App\Interfaces;
 
-interface FamilyMemberRepositoryInterface
+interface UserRepositoryInterface
 {
     public function getAll(
         ?string $search,
@@ -15,12 +15,12 @@ interface FamilyMemberRepositoryInterface
         ?int $rowPerPage
     );
 
-    public function create(
-        array $data
-    );
-
     public function getById(
         string $id
+    );
+
+    public function create(
+        array $data
     );
 
     public function update(
@@ -31,4 +31,7 @@ interface FamilyMemberRepositoryInterface
     public function delete(
         string $id
     );
+
+
+    
 }

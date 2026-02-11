@@ -1,13 +1,12 @@
 <?php
+namespace App\Interfaces;
 
-namespace App\Interface;
-
-interface UserRepositoryInterface
+interface SocialAssistanceRepositoryInterface
 {
     public function getAll(
         ?string $search,
         ?int $limit,
-        bool $excecute
+        bool $execute
     );
 
     public function getAllPaginate(
@@ -15,12 +14,12 @@ interface UserRepositoryInterface
         ?int $rowPerPage
     );
 
-    public function getById(
-        string $id
-    );
-
     public function create(
         array $data
+    );
+
+    public function getById(
+        string $id
     );
 
     public function update(
@@ -31,7 +30,4 @@ interface UserRepositoryInterface
     public function delete(
         string $id
     );
-
-
-    
 }

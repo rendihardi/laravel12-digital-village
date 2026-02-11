@@ -3,10 +3,11 @@
 namespace App\Repositories;
 use App\Models\FamilyMember;
 use App\Interface\FamilyMemberRepositoryInterface;
+use App\Interfaces\FamilyMemberRepositoryInterface as InterfacesFamilyMemberRepositoryInterface;
 use App\Models\HeadOfFamily;
 use Illuminate\Support\Facades\DB;
 
-class FamilyMemberRepository implements FamilyMemberRepositoryInterface
+class FamilyMemberRepository implements InterfacesFamilyMemberRepositoryInterface
 {
     public function getAll($search = null, $limit = null, $excecute = false)
     {

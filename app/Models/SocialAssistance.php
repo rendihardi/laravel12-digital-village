@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class SocialAsisstance extends Model
+class SocialAssistance extends Model
 {
     use SoftDeletes,HasUlids;
     protected $fillable = [
@@ -20,9 +20,15 @@ class SocialAsisstance extends Model
         'is_available',
     ];
 
+    public function scopeSearch($query, $search){
+        return $query->where('name', 'like', '%'.$search.'%')
+        ->orWhere('provider', 'like', '%'.$search.'%')
+        ->orWhere('amount', 'like', '%'.$search.'%');
+    }
+
     public function socialAsisstanceRecipients()
     {
-        return $this->hasMany(SocialAsisstanceRecipient::class);
+        return $this->hasMany(SocialAssistanceRecipient::class);
     }
     
 }

@@ -7,7 +7,7 @@ use App\Http\Requests\FamilyMemberStoreRequest;
 use App\Http\Requests\FamilyMemberUpdateRequest;
 use App\Http\Resources\FamilyMemberResource;
 use App\Http\Resources\PaginateResource;
-use App\Interface\FamilyMemberRepositoryInterface;
+use App\Interfaces\FamilyMemberRepositoryInterface;
 use Illuminate\Http\Request;
 
 class FamilyMemberController extends Controller

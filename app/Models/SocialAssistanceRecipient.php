@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class SocialAsisstanceRecipient extends Model
+class SocialAssistanceRecipient extends Model
 {
     use HasUuids,SoftDeletes;
     protected $fillable = [
@@ -23,7 +23,7 @@ class SocialAsisstanceRecipient extends Model
 
     public function socialAsisstance()
     {
-        return $this->belongsTo(SocialAsisstance::class);
+        return $this->belongsTo(SocialAssistance::class);
     }
     public function headOfFamily()
     {

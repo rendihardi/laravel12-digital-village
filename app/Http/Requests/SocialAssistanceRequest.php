@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class SocialAssistanceRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'name'=> 'required|string|max:255',
+            'thumbnail'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category'=> 'required|string|max:255',
+            'description'=> 'required|string|max:255',
+            'amount'=> 'required|integer',
+            'provider'=> 'required|string|max:255',
+            'is_available'=> 'required|boolean',
+        ];
+    }
+
+    public function attributes()
+    {
+        return[
+            'name'=> 'Name',
+            'thumbnail'=> 'Thumbnail',
+            'category'=> 'Category',
+            'description'=> 'Description',
+            'amount'=> 'Amount',
+            'provider'=> 'Provider',
+            'is_available'=> 'Is Available',
+        ];
+    }
+}

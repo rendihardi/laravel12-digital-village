@@ -7,7 +7,7 @@ use App\Http\Requests\HeadOfFamilyStoreRequest;
 use App\Http\Requests\HeadOfFamilyUpdateRequest;
 use App\Http\Resources\HeadOfFamilyResource;
 use App\Http\Resources\PaginateResource;
-use App\Interface\HeadOfFamilyRepositoryInterface;
+use App\Interfaces\HeadOfFamilyRepositoryInterface;
 use Illuminate\Http\Request;
 
 class HeadOfFamilyController extends Controller

@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Interface\HeadOfFamilyRepositoryInterface;
+use App\Interfaces\HeadOfFamilyRepositoryInterface;
 use App\Models\HeadOfFamily;
 use Illuminate\Support\Facades\DB;
 
