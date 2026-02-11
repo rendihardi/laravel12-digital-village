@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('social_asisstance_recipients', function (Blueprint $table) {
-            $table->uuid()->primary();
-            $table->uuid('social_asisstance_id');
-            $table->foreign('social_asisstance_id')->references('id')->on('social_assistances');
+        Schema::create('social_assistance_recipients', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('social_assistance_id');
+            $table->foreign('social_assistance_id')->references('id')->on('social_assistances');
             $table->uuid('head_of_family_id');
             $table->foreign('head_of_family_id')->references('id')->on('head_of_families');
             $table->enum('bank',['bri','bni','bca','mandiri']);
             $table->decimal('amount',10,2);
             $table->longText('reason');
-            $table->integer('account_number');
+            $table->string('account_number');
             $table->string('proof');
             $table->enum('status',['pending','approved','rejected'])->default('pending');
             $table->softDeletes();

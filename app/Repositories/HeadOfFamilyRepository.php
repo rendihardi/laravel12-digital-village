@@ -62,8 +62,12 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
 
        public function getById(string $id)
     {
+       try {
         $query = HeadOfFamily::where('id', $id);
         return $query->first();
+       } catch (\Exception $e) {
+           throw $e;
+       }
     }
 
     public function update(string $id, array $data)
