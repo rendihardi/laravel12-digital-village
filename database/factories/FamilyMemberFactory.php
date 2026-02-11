@@ -24,7 +24,7 @@ class FamilyMemberFactory extends Factory
             'phone_number' => $this->faker->unique()->phoneNumber(),
             'occupation' => $this->faker->jobTitle(),
             'marital_status' => $this->faker->randomElement(['single', 'married']),
-            'relation' => $this->faker->randomElement(['wife', 'child','husbaand']),
+            'relation' => $this->faker->randomElement(['wife', 'child','husband']),
         ];
     }
 }

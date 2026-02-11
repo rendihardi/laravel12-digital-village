@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('occupation');  
             $table->enum('marital_status', ['single', 'married']);
-            $table->enum('relation', ['wife', 'child','husbaand']);
+            $table->enum('relation', ['wife', 'child','husband']);
             $table->softDeletes(); 
             $table->timestamps();
         });
