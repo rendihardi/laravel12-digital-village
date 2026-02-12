@@ -96,7 +96,7 @@ class FamilyMemberController extends Controller
             if(!$familyMember) return ResponseHelper::jsonResponse(false, 'member of family not found', null, 404);
             $familyMember = $this->familyMemberRepository->update(
                 $id,
-                $request->all()
+                $request
             );
             return ResponseHelper::jsonResponse(true, 'data updated', new FamilyMemberResource($familyMember), 200);
         }catch (\Exception $e) {

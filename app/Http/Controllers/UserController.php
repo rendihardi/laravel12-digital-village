@@ -48,8 +48,6 @@ class UserController extends Controller
             $users = $this->userRepository->getAllPaginate(
                 $request['search'] ?? null,
                 $request['rowPerPage']
-
-
             );
 
             return ResponseHelper::jsonResponse(true, 'success', PaginateResource::make($users, UserResource::class), 200);
