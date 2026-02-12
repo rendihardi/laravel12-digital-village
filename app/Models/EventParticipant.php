@@ -18,6 +18,12 @@ class EventParticipant extends Model
         'payment_status',
     ];
 
+    public function scopeSearch($query, $search) {
+        return $query->whereHas('event', function ($query) use ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        });
+    }
+
     public function event()
     {
         return $this->belongsTo(Events::class);

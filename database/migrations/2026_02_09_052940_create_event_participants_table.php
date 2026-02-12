@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('head_of_family_id')->references('id')->on('head_of_families');
             $table->integer('quantity');
             $table->decimal('total_price',10,2);
-            $table->string('payment_status');
+            $table->string('payment_status')->default('unpaid');
             $table->softDeletes();
             $table->timestamps();
         });

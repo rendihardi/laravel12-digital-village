@@ -21,5 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call([HeadOfFamilySeeder::class]);
         $this->call([SocialAssistanceSeeder::class]);
         $this->call([SocialAssistanceRecipientSeeder::class]);
+        $this->call([EventSeeder::class]);
+        $this->call([EventParticipantSeeder::class]);
     }
 }
