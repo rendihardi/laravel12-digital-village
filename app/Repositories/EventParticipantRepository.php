@@ -65,10 +65,11 @@ class EventParticipantRepository implements EventParticipantRepositoryInterFace
             $eventParticipant->event_id = $data['event_id'];
             $eventParticipant->head_of_family_id = $data['head_of_family_id'];
             if(isset($data['quantity'])) {
-                $eventParticipant->total_price = $event->price * $data['quantity'];
-            }else{
                  $eventParticipant->quantity = $data['quantity'];
+            }else{
+                $data['quantity'] = $eventParticipant->quantity;
             }
+            $eventParticipant->total_price = $event->price * $data['quantity'];
             if(isset($data['payament_status'])) {
                 $eventParticipant->thumbnail = $data['payament_status'];
             }

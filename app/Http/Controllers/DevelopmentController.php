@@ -88,6 +88,10 @@ class DevelopmentController extends Controller
     {
         $request = $request->validated();
         try {
+            $development = $this->developmentRepository->getById($id);
+            if (!$development) {
+                return ResponseHelper::jsonResponse(false, 'development not found', null, 404);
+            }
             $development = $this->developmentRepository->update($id, $request);
             return ResponseHelper::jsonResponse(true, 'data updated', DevelopmentResurce::make($development), 200);
         } catch (\Exception $e) {

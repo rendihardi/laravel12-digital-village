@@ -73,6 +73,7 @@ class EventParticipantController extends Controller
     {
         try {
             $eventParticipant = $this->eventParticipantRepository->getById($id);
+            if(!$eventParticipant) return ResponseHelper::jsonResponse(false, 'eventParticipant not found', null, 404);
             return ResponseHelper::jsonResponse(true, 'success', EventParticipantResource::make($eventParticipant), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
@@ -86,6 +87,8 @@ class EventParticipantController extends Controller
     {
         $request = $request->validated();
         try {
+            $eventParticipant = $this->eventParticipantRepository->getById($id);
+            if(!$eventParticipant) return ResponseHelper::jsonResponse(false, 'eventParticipant not found', null, 404);
             $eventParticipant = $this->eventParticipantRepository->update($id, $request);
             return ResponseHelper::jsonResponse(true, 'data updated', EventParticipantResource::make($eventParticipant), 200);
         } catch (\Exception $e) {
