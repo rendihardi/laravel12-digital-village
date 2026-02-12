@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('person_in_charge');
             $table->date('start_date');
             $table->date('end_date');
-            $table->decimal('amount', 10, 2);
-            $table->enum('status', ['ongoing', 'completed']);
+            $table->decimal('amount', 20, 2);
+            $table->enum('status', ['ongoing', 'completed'])->default('ongoing');
             $table->softDeletes();
             $table->timestamps();
         });

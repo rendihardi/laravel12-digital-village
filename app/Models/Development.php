@@ -21,6 +21,11 @@ class Development extends Model
         'status',
     ];
 
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('name', 'like', '%' . $search . '%');
+    }
+
     public function developmentApplicants()
     {
         return $this->hasMany(DevelopmentApplicant::class);
