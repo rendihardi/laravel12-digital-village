@@ -8,14 +8,27 @@ use App\Http\Requests\EventParticipantUpdateRequest;
 use App\Http\Resources\EventParticipantResource;
 use App\Interfaces\EventParticipantRepositoryInterFace;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Spatie\Permission\Middleware\PermissionMiddleware;
 
-class EventParticipantController extends Controller
+class EventParticipantController extends Controller implements HasMiddleware
 {
     private EventParticipantRepositoryInterFace $eventParticipantRepository;
 
     public function __construct(EventParticipantRepositoryInterFace $eventParticipantRepository)
     {
         $this->eventParticipantRepository = $eventParticipantRepository;
+    }
+
+    public static function middleware()
+    {
+       return [
+           new Middleware(PermissionMiddleware::using(['event-participant-menu|event-participant-list|event-participant-create|event-participant-edit|event-participant-delete']),only: ['index','getAllPaginated' ,'store', 'show', 'update', 'destroy']),
+           new Middleware(PermissionMiddleware::using(['event-participant-create']),only: ['store']),
+           new Middleware(PermissionMiddleware::using(['event-participant-edit']),only: ['update']),
+           new Middleware(PermissionMiddleware::using(['event-participant-delete']),only: ['destroy']),
+       ];
     }
     /**
      * Display a listing of the resource.

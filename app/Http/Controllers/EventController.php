@@ -9,12 +9,15 @@ use App\Http\Resources\EventResource;
 use App\Interfaces\EventRepositoryInterface;
 use Illuminate\Container\Attributes\Log;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log as FacadesLog;
+use Spatie\Permission\Middleware\PermissionMiddleware;
 
 use function Illuminate\Log\log;
 
-class EventController extends Controller
+class EventController extends Controller implements HasMiddleware
 {
     private EventRepositoryInterface $eventRepository;
 
@@ -25,6 +28,16 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public static function middleware()
+    {
+        return [
+            new Middleware(PermissionMiddleware::using(['event-menu|event-list|event-create|event-edit|event-delete']),only: ['index','getAllPaginated' ,'store', 'show', 'update', 'destroy']),
+            new Middleware(PermissionMiddleware::using(['event-create']),only: ['store']),
+            new Middleware(PermissionMiddleware::using(['event-edit']),only: ['update']),
+            new Middleware(PermissionMiddleware::using(['event-delete']),only: ['destroy']),
+        ];
+    }
+
     public function index(Request $request)
     {
         try{

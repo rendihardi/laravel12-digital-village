@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        $this->call([UserSeeder::class]);
         $this->call([HeadOfFamilySeeder::class]);
         $this->call([SocialAssistanceSeeder::class]);
         $this->call([SocialAssistanceRecipientSeeder::class]);
@@ -25,5 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call([EventParticipantSeeder::class]);
         $this->call([DevelopmentSeeder::class]);
         $this->call([DevelopmentApplicantSeeder::class]);
+        $this->call([PermissionSeeder::class]);
+        $this->call([RoleSeeder::class]);
+        $this->call([UserSeeder::class]);
     }
 }

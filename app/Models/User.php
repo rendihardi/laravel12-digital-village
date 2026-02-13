@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+/** @mixin \Laravel\Sanctum\HasApiTokens */
+
+
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Traits\UUID;
@@ -10,11 +13,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasUuids,SoftDeletes;
+    use HasFactory, Notifiable, HasUuids,SoftDeletes, HasRoles, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
