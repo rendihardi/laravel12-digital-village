@@ -15,14 +15,20 @@ class SocialAssistanceResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+
             'id' => $this->id,
             'name' => $this->name,
-            'thumbnail' => $this->thumbnail,
+            'thumbnail' => asset('storage/' . $this->thumbnail),
             'category' => $this->category,
             'description' => $this->description,
             'amount' => $this->amount,
             'provider' => $this->provider,
             'is_available' => $this->is_available,
+            'social_assistance_recipients' =>
+            SocialAssistanceRecipientResource::collection(
+        $this->whenLoaded('socialAssistanceRecipients')
+        ),
+
         ];
     }
 }

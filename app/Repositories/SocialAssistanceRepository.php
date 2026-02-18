@@ -10,7 +10,7 @@ class SocialAssistanceRepository implements SocialAssistanceRepositoryInterface 
 
     public function getAll($search = null, $limit = null, $excecute = false)
       {
-        $query = SocialAssistance::query();
+        $query = SocialAssistance::with('socialAssistanceRecipients');
 
         if ($search) {
             $query->search($search);
@@ -56,7 +56,7 @@ class SocialAssistanceRepository implements SocialAssistanceRepositoryInterface 
     public function getById(string $id)
     {
        try{
-        $query = SocialAssistance::where('id', $id);
+        $query = SocialAssistance::with('socialAssistanceRecipients')->where('id', $id);
         return $query->first();
        }catch (\Exception $e) {
         throw $e;

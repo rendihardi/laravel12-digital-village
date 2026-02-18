@@ -21,7 +21,7 @@ class HeadOfFamily extends Model
         'material_status',
     ];
     
-    public function scopeSearach($query, $search)
+    public function scopeSearch($query, $search)
     {
         return $query->whereHas('user', function ($query) use ($search) {
             $query->where('name', 'like', '%'.$search.'%')

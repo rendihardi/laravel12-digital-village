@@ -15,8 +15,8 @@ class SocialAssistanceRecipientSeeder extends Seeder
      */
     public function run(): void
     {
-       $socialAssistances = SocialAssistance::limit(1)->get();
-        $headOfFamilies = HeadOfFamily::limit(1)->get();
+       $socialAssistances = SocialAssistance::limit(10)->get();
+        $headOfFamilies = HeadOfFamily::limit(10)->get();
 
         foreach ($socialAssistances as $socialAssistance) {
          foreach ($headOfFamilies as $headOfFamily) {

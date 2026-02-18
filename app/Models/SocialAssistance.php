@@ -27,7 +27,7 @@ class SocialAssistance extends Model
         ->orWhere('amount', 'like', '%'.$search.'%');
     }
 
-    public function socialAsisstanceRecipients()
+    public function socialAssistanceRecipients()
     {
         return $this->hasMany(SocialAssistanceRecipient::class);
     }
