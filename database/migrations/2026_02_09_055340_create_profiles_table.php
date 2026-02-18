@@ -18,8 +18,8 @@ return new class extends Migration
             $table->longText('about');
             $table->string('headman');
             $table->integer('people');
-            $table->decimal('agricultural_area', 10, 2);
-            $table->decimal('total_area', 10, 2);
+            $table->bigInteger('agricultural_area');
+            $table->bigInteger('total_area');
             $table->softDeletes();  
             $table->timestamps();
         });

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid('head_of_family_id');
             $table->foreign('head_of_family_id')->references('id')->on('head_of_families');
             $table->enum('bank',['bri','bni','bca','mandiri']);
-            $table->decimal('amount',10,2);
+            $table->bigInteger('amount');
             $table->longText('reason');
             $table->string('account_number');
             $table->string('proof');

@@ -23,7 +23,7 @@ class SocialAssistanceRequest extends FormRequest
     {
         return [
             'name'=> 'required|string|max:255',
-            'thumbnail'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'thumbnail'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'category'=> 'required|string|max:255',
             'description'=> 'required|string|max:255',
             'amount'=> 'required|integer',
