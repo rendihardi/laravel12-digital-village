@@ -22,16 +22,27 @@ class SocialAssistanceRecipient extends Model
         'status',
     ];
 
-    public function scopeSearch($query, $search){
-        return $query->whereHas('socialAsisstance', function ($query) use ($search) {
-            $query->where('name', 'like', '%'.$search.'%')
-            ->orWhere('provider', 'like', '%'.$search.'%');
-        })->orWhereHas('headOfFamily', function ($query) use ($search) {
-            $query->where('name', 'like', '%'.$search.'%')
-            ->orWhere('nik', 'like', '%'.$search.'%')
-            ->orWhere('phone', 'like', '%'.$search.'%');
+public function scopeSearch($query, $search)
+{
+    return $query->where(function ($q) use ($search) {
+
+        $q->whereHas('socialAssistance', function ($q) use ($search) {
+            $q->where('name', 'like', "%{$search}%")
+              ->orWhere('provider', 'like', "%{$search}%");
+        })
+
+        ->orWhereHas('headOfFamily.user', function ($q) use ($search) {
+            $q->where('name', 'like', "%{$search}%");
+        })
+
+        ->orWhereHas('headOfFamily', function ($q) use ($search) {
+            $q->where('identity_number', 'like', "%{$search}%")
+              ->orWhere('phone_number', 'like', "%{$search}%");
         });
-    }
+
+    });
+}
+
 
     public function socialAssistance()
     {

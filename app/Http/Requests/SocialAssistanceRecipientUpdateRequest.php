@@ -29,6 +29,7 @@ class SocialAssistanceRecipientUpdateRequest extends FormRequest
             'account_number' => 'required|string',
             'proof' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'reason' => 'required|string',
+            'status'=>'required|string',
         ];
     }
 
