@@ -6,6 +6,7 @@ use App\Helpers\ResponseHelper;
 use App\Http\Requests\EventParticipantStoreRequest;
 use App\Http\Requests\EventParticipantUpdateRequest;
 use App\Http\Resources\EventParticipantResource;
+use App\Http\Resources\PaginateResource;
 use App\Interfaces\EventParticipantRepositoryInterFace;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -58,7 +59,7 @@ class EventParticipantController extends Controller implements HasMiddleware
                 $request['search'] ?? null,
                 $request['rowPerPage']
             );
-            return ResponseHelper::jsonResponse(true, 'success', EventParticipantResource::collection($eventParticipants), 200);
+            return ResponseHelper::jsonResponse(true, 'success', PaginateResource::make($eventParticipants, EventParticipantResource::class), 200);
         
         }catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);

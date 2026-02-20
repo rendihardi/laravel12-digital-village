@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DevelompentApplicantResource extends JsonResource
+class DevelopmentApplicantResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,10 @@ class DevelompentApplicantResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'head_of_family'=> new HeadOfFamilyResource($this->headOfFamily),
+            'user'=> new UserResource($this->user),
             'development'=> new DevelopmentResurce($this->development),
-            'status'=>$this->status
+            'status'=>$this->status,
+            'created_at'=>$this->created_at
         ];
     }
 }

@@ -6,6 +6,7 @@ use App\Helpers\ResponseHelper;
 use App\Http\Requests\DevelopmentSotreRequest;
 use App\Http\Requests\DevelopmentUpdateRequest;
 use App\Http\Resources\DevelopmentResurce;
+use App\Http\Resources\PaginateResource;
 use App\Interfaces\DevelopmentRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -47,7 +48,7 @@ class DevelopmentController extends Controller implements HasMiddleware
         }
     }
 
-    public function getAllPaginate(Request $request){
+    public function getAllPaginated(Request $request){
         $request = $request->validate(
             [
                 'search' => 'nullable|string',
@@ -59,7 +60,7 @@ class DevelopmentController extends Controller implements HasMiddleware
                 $request['search'] ?? null,
                 $request['rowPerPage']
             );
-            return ResponseHelper::jsonResponse(true, 'success', DevelopmentResurce::collection($developments), 200);
+            return ResponseHelper::jsonResponse(true, 'success', PaginateResource::make($developments, DevelopmentResurce::class), 200);
         
         }catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);

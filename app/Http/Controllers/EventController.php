@@ -6,6 +6,7 @@ use App\Helpers\ResponseHelper;
 use App\Http\Requests\EventStoreRequest;
 use App\Http\Requests\EventUpdateRequest;
 use App\Http\Resources\EventResource;
+use App\Http\Resources\PaginateResource;
 use App\Interfaces\EventRepositoryInterface;
 use Illuminate\Container\Attributes\Log;
 use Illuminate\Http\Request;
@@ -66,7 +67,7 @@ class EventController extends Controller implements HasMiddleware
                 $request['search'] ?? null,
                 $request['rowPerPage']
             );
-            return ResponseHelper::jsonResponse(true, 'success', EventResource::collection($Events), 200);
+            return ResponseHelper::jsonResponse(true, 'success', PaginateResource::make($Events, EventResource::class), 200);
         
         }catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);

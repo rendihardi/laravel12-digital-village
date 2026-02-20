@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\DevelopmentApplicantStoreRequest;
 use App\Http\Requests\DevelopmentApplicantUpdateRequest;
-use App\Http\Resources\DevelompentApplicantResource;
+use App\Http\Resources\DevelopmentApplicantResource;
+use App\Http\Resources\PaginateResource;
 use App\Interfaces\DevelopmentApplicantRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -42,7 +43,7 @@ class DevelopmentApplicantController extends Controller implements HasMiddleware
                 $request->limit,
                 true
             );
-            return ResponseHelper::jsonResponse(true, 'success', DevelompentApplicantResource::collection($developmentsApplicant), 200);
+            return ResponseHelper::jsonResponse(true, 'success', DevelopmentApplicantResource::collection($developmentsApplicant), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }
@@ -60,7 +61,7 @@ class DevelopmentApplicantController extends Controller implements HasMiddleware
                 $request['search'] ?? null,
                 $request['rowPerPage']
             );
-            return ResponseHelper::jsonResponse(true, 'success', DevelompentApplicantResource::collection($developmentsApplicant), 200);
+            return ResponseHelper::jsonResponse(true, 'success', PaginateResource::make($developmentsApplicant, DevelopmentApplicantResource::class), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }
@@ -74,7 +75,7 @@ class DevelopmentApplicantController extends Controller implements HasMiddleware
         $request = $request->validated();
         try {
             $developmentApplicant = $this->developmentApplicantRepository->create($request);
-            return ResponseHelper::jsonResponse(true, 'data created', DevelompentApplicantResource::make($developmentApplicant), 201);
+            return ResponseHelper::jsonResponse(true, 'data created', DevelopmentApplicantResource::make($developmentApplicant), 201);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }
@@ -89,7 +90,7 @@ class DevelopmentApplicantController extends Controller implements HasMiddleware
        try {
             $developmentApplicant = $this->developmentApplicantRepository->getById($id);
             if(!$developmentApplicant) return ResponseHelper::jsonResponse(false, 'developmentApplicant not found', null, 404);
-            return ResponseHelper::jsonResponse(true, 'success', DevelompentApplicantResource::make($developmentApplicant), 200);
+            return ResponseHelper::jsonResponse(true, 'success', DevelopmentApplicantResource::make($developmentApplicant), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
        }
@@ -105,7 +106,7 @@ class DevelopmentApplicantController extends Controller implements HasMiddleware
             $developmentApplicant = $this->developmentApplicantRepository->getById($id);
             if(!$developmentApplicant) return ResponseHelper::jsonResponse(false, 'developmentApplicant not found', null, 404);
             $developmentApplicant = $this->developmentApplicantRepository->update($id, $request);
-            return ResponseHelper::jsonResponse(true, 'data updated', DevelompentApplicantResource::make($developmentApplicant), 200);
+            return ResponseHelper::jsonResponse(true, 'data updated', DevelopmentApplicantResource::make($developmentApplicant), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }

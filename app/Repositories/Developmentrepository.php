@@ -10,7 +10,7 @@ class DevelopmentRepository implements DevelopmentRepositoryInterface
 {
     public function getAll($search = null, $limit = null, $excecute = false)
     {
-        $query = Development::query();
+        $query = Development::with('developmentApplicants');
         
         if ($search) {
             $query->search($search);
@@ -34,7 +34,7 @@ class DevelopmentRepository implements DevelopmentRepositoryInterface
 
     public function getById(string $id)
     {
-        $query = Development::where('id', $id);
+        $query = Development::with('developmentApplicants')->where('id', $id);
         return $query->first();
     }
 
