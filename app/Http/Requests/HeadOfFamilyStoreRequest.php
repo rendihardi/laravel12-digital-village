@@ -25,7 +25,7 @@ class HeadOfFamilyStoreRequest extends FormRequest
             'name'=> 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'profile_picture'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'profile_picture'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'identity_number'=> 'required|string|unique:head_of_families',
             'gender'=> 'required|string|in:male,female',
             'date_of_birth'=> 'required|date',

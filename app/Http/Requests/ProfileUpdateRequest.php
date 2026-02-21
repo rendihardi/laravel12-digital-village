@@ -30,7 +30,7 @@ class ProfileUpdateRequest extends FormRequest
             'agricultural_area' => 'required|string|max:255',
             'total_area' => 'required|string|max:255',
             'images' => 'nullable|array',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
         ];
     }
 

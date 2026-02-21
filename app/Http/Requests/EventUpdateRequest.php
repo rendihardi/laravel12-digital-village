@@ -22,7 +22,7 @@ class EventUpdateRequest extends FormRequest
    public function rules(): array
     {
         return [
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'price' => 'required|integer',

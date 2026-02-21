@@ -13,7 +13,7 @@ class SocialAssistanceUpdateRequest extends FormRequest
     {
         return [
             'name'=> 'required|string|max:255',
-            'thumbnail'=> 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'thumbnail'=> 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'category'=> 'required|string|max:255',
             'description'=> 'required|string|max:255',
             'amount'=> 'required|integer',

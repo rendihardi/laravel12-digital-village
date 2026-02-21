@@ -27,7 +27,7 @@ class SocialAssistanceRecipientStoreRequest extends FormRequest
             'amount' => 'required|numeric',
             'bank' => 'required|string',
             'account_number' => 'required|string',
-            'proof' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'proof' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'reason' => 'required|string',
             'status'=>'nullable|string',
         ];

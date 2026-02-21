@@ -22,7 +22,7 @@ class DevelopmentSotreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:12048',
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'person_in_charge' => 'required|string|max:255',
