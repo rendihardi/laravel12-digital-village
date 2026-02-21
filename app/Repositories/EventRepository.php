@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\EventRepositoryInterface;
-use App\Models\Events;
+use App\Models\Event;
 use Illuminate\Support\Facades\DB;
 
 use function Illuminate\Log\log;
@@ -12,7 +12,7 @@ class EventRepository implements EventRepositoryInterface
 {
       public function getAll($search = null, $limit = null, $excecute = false)
     {
-        $query = Events::query();
+        $query = Event::with('eventParticipants.headOfFamily.user');
 
         if ($search) {
             $query->search($search);
@@ -37,7 +37,7 @@ class EventRepository implements EventRepositoryInterface
     {
         DB::beginTransaction();
         try {
-            $event = new Events;
+            $event = new Event;
             $event->thumbnail=$data['thumbnail']->store('assets/events', 'public');
             $event->name = $data['name'];
             $event->description = $data['description'];
@@ -58,7 +58,7 @@ class EventRepository implements EventRepositoryInterface
     {
         DB::beginTransaction();
         try {
-            $event = Events::find($id);
+            $event = Event::find($id);
             if(isset($data['thumbnail'])) {
                 $event->thumbnail=$data['thumbnail']->store('assets/events', 'public');
             }
@@ -79,7 +79,7 @@ class EventRepository implements EventRepositoryInterface
 
     public function getById(string $id)
     {
-        $query = Events::where('id', $id);
+        $query = Event::with('eventParticipants.headOfFamily.user')->where('id', $id);
         return $query->first();
     }
 
@@ -87,7 +87,7 @@ class EventRepository implements EventRepositoryInterface
     {
         DB::beginTransaction();
         try {
-            $event = Events::find($id);
+            $event = Event::find($id);
             $event->delete();
             DB::commit();
             return $event;

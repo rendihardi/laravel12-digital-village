@@ -19,7 +19,7 @@ class EventParticipantFactory extends Factory
         return [
             'quantity' => $this->faker->numberBetween(1, 10),
             'quantity' => $this->faker->randomFloat(2, 0, 100),
-            'total_price' => $this->faker->randomFloat(2, 0, 100),
+            'total_price' => $this->faker->numberBetween(100000, 10000000),
             'payment_status' => $this->faker->randomElement(['paid','cancelled','unpaid']),
         ];
     }

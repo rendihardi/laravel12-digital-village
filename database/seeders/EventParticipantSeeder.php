@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Events;
+use App\Models\Event;
 use App\Models\HeadOfFamily;
 use Database\Factories\EventParticipantFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,7 +15,7 @@ class EventParticipantSeeder extends Seeder
      */
     public function run(): void
     {
-       $events = Events::limit(10)->get();
+       $events = Event::limit(10)->get();
         $headOfFamilies = HeadOfFamily::limit(10)->get();
 
         foreach ($events as $events) {

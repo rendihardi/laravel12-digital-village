@@ -23,6 +23,7 @@ class EventResource extends JsonResource
             'date' => $this->date,
             'time'=> $this->time,
             'is_active' => $this->is_active,
+            'event_participants' => EventParticipantResource::collection($this->whenLoaded('eventParticipants')),  
         ];
     }
 }

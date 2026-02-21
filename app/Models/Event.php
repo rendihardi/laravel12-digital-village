@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Events extends Model
+class Event extends Model
 {
     use SoftDeletes, HasUuids;
     protected $fillable = [

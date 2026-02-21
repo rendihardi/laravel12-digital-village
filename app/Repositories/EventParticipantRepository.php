@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\EventParticipantRepositoryInterFace;
 use App\Models\EventParticipant;
-use App\Models\Events;
+use App\Models\Event;
 use Illuminate\Support\Facades\DB;
 
 class EventParticipantRepository implements EventParticipantRepositoryInterFace
@@ -36,7 +36,7 @@ class EventParticipantRepository implements EventParticipantRepositoryInterFace
     {
           DB::beginTransaction();
         try{
-            $event=Events::find($data['event_id']);
+            $event=Event::find($data['event_id']);
             $eventParticipant = new EventParticipant();
             $eventParticipant->event_id = $data['event_id'];
             $eventParticipant->head_of_family_id = $data['head_of_family_id'];
@@ -60,7 +60,7 @@ class EventParticipantRepository implements EventParticipantRepositoryInterFace
     {
         try{
             DB::beginTransaction();
-             $event=Events::find($data['event_id']);
+             $event=Event::find($data['event_id']);
             $eventParticipant = EventParticipant::find($id);
             $eventParticipant->event_id = $data['event_id'];
             $eventParticipant->head_of_family_id = $data['head_of_family_id'];

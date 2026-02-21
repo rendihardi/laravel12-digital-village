@@ -26,7 +26,7 @@ class EventParticipant extends Model
 
     public function event()
     {
-        return $this->belongsTo(Events::class);
+        return $this->belongsTo(Event::class);
     }
 
     public function headOfFamily()
