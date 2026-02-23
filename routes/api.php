@@ -48,9 +48,9 @@ Route::get('development/all/paginated', [DevelopmentController::class, 'getAllPa
 Route::apiResource('development-applicants',DevelopmentApplicantController::class);
 Route::get('development-applicants/all/paginated', [DevelopmentApplicantController::class, 'getAllPaginated']);
 
-Route::get('profiles', [ProfileController::class, 'index']);
-Route::post('profiles', [ProfileController::class, 'store']);
-Route::put('profiles', [ProfileController::class, 'update']);
+Route::get('profile', [ProfileController::class, 'index']);
+Route::post('profile', [ProfileController::class, 'store']);
+Route::put('profile', [ProfileController::class, 'update']);
 
 });
 

@@ -24,13 +24,14 @@ class ProfileStoreRequest extends FormRequest
         return [
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'name' => 'required|string|max:255',
-            'about' => 'required|string|max:255',
+            'about' => 'required|string|max:25500',
             'headman' => 'required|string|max:255',
-            'people' => 'required|string|max:255',
-            'agricultural_area' => 'required|string|max:255',
-            'total_area' => 'required|string|max:255',
+            'people' => 'required|numeric',
+            'agricultural_area' => 'required|numeric',
+            'total_area' => 'required|numeric',
             'images' => 'required|array',
             'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'location' => 'required|string|max:255',
         ];
     }
 
