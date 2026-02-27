@@ -17,6 +17,11 @@ class DevelopmentApplicantRepository implements DevelopmentApplicantRepositoryIn
             $query->search($search);
         }
         $query->orderBy('created_at', 'desc');
+//         $user = auth()->user();
+
+// if ($user->hasRole('head-of-family')) {
+//     $query->where('user_id', $user->id);
+// }
         if ($limit) {
             $query->limit($limit);
         }    

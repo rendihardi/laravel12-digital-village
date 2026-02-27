@@ -45,8 +45,8 @@ Route::get('event-participant/all/paginated', [EventParticipantController::class
 Route::apiResource('development',DevelopmentController::class);
 Route::get('development/all/paginated', [DevelopmentController::class, 'getAllPaginated']);
 
-Route::apiResource('development-applicants',DevelopmentApplicantController::class);
-Route::get('development-applicants/all/paginated', [DevelopmentApplicantController::class, 'getAllPaginated']);
+Route::apiResource('development-applicant',DevelopmentApplicantController::class);
+Route::get('development-applicant/all/paginated', [DevelopmentApplicantController::class, 'getAllPaginated']);
 
 Route::get('profile', [ProfileController::class, 'index']);
 Route::post('profile', [ProfileController::class, 'store']);

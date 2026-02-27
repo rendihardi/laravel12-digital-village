@@ -17,6 +17,10 @@ class FamilyMemberRepository implements InterfacesFamilyMemberRepositoryInterfac
             $query->search($search);
         }
         $query->orderBy('created_at', 'desc');
+         $query->orderBy('created_at', 'desc');
+        if(auth()->user()->hasRole('head-of-family')) {
+            $query->where('head_of_family_id', auth()->user()->headOfFamily->id);
+        }
         if ($limit) {
             $query->limit($limit);
         }    
