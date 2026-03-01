@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class EventParticipantRepository implements EventParticipantRepositoryInterFace
 {
-     public function getAll($search = null, $limit = null, $excecute = false)
+     public function getAll($search = null, $limit = null, $excecute = false, $status = null)
     {
         $query = EventParticipant::query();
 
@@ -20,6 +20,15 @@ class EventParticipantRepository implements EventParticipantRepositoryInterFace
         if(auth()->user()->hasRole('head-of-family')) {
             $query->where('head_of_family_id', auth()->user()->headOfFamily->id);
         }
+        //  if ($status === 'joined') {
+        //   $query->whereHas('eventParticipants', function ($query) {
+        //   $query->where('head_of_family_id', auth()->user()->headOfFamily->id);
+        //   });
+        //     }
+
+        // if ($status === 'joined') {
+        //  $query->where('head_of_family_id', auth()->user()->headOfFamily->id);
+        // }
         if ($limit) {
             $query->limit($limit);
         }    
@@ -29,9 +38,9 @@ class EventParticipantRepository implements EventParticipantRepositoryInterFace
         return $query;      
     }
 
-    public function getAllPaginate(?string $search, ?int $rowPerPage)
+    public function getAllPaginate(?string $search, ?int $rowPerPage, $status = null)
     {
-        $query = $this->getAll($search, $rowPerPage, false);
+        $query = $this->getAll($search, $rowPerPage, false, $status);
         return $query->paginate($rowPerPage);
     }
 
@@ -46,7 +55,36 @@ class EventParticipantRepository implements EventParticipantRepositoryInterFace
             $eventParticipant->quantity = $data['quantity'];
             $eventParticipant->total_price = $event->price * $data['quantity'];
             $eventParticipant->save();
-            DB::commit();
+            
+
+            // Set your Merchant Server Key
+            \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+
+            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            \Midtrans\Config::$isProduction = config('midtrans.isProduction');
+
+            // Set sanitization on (default)
+            \Midtrans\Config::$isSanitized = config('midtrans.isSanitized');
+
+            // Set 3DS transaction for credit card to true
+            \Midtrans\Config::$is3ds = config('midtrans.is3ds');
+
+        $params = array(
+           'transaction_details' => array(
+           'order_id'     => $eventParticipant->id,
+           'gross_amount' => $eventParticipant->total_price,
+         ),
+          'customer_details' => array(
+         'first_name' => auth()->user()->name,
+         ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        $eventParticipant->snap_token = $snapToken;
+        $eventParticipant->save();
+        DB::commit();
+
             return $eventParticipant;
         }catch(\Exception $e){
             throw $e;

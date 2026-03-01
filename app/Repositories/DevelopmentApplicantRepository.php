@@ -6,12 +6,13 @@ use App\Interfaces\DevelopmentApplicantRepositoryInterface;
 use App\Models\Development;
 use App\Models\DevelopmentApplicant;
 use Illuminate\Support\Facades\DB;
+use App\Models\FamilyMember;
 
 class DevelopmentApplicantRepository implements DevelopmentApplicantRepositoryInterface
 {
    public function getAll($search = null, $limit = null, $excecute = false)
     {
-        $query = Development::query();
+        $query = DevelopmentApplicant::query();
         
         if ($search) {
             $query->search($search);
@@ -22,6 +23,25 @@ class DevelopmentApplicantRepository implements DevelopmentApplicantRepositoryIn
 // if ($user->hasRole('head-of-family')) {
 //     $query->where('user_id', $user->id);
 // }
+
+            $user = auth()->user();
+
+    // 🔥 Kalau head-of-family
+    if ($user->hasRole('head-of-family')) {
+
+        $members = FamilyMember::where(
+                'head_of_family_id',
+                $user->headOfFamily->id
+            )
+            ->pluck('user_id')
+            ->toArray();
+
+        // tambahkan dirinya sendiri juga
+        $members[] = $user->id;
+
+        $query->whereIn('user_id', $members);
+    }
+
         if ($limit) {
             $query->limit($limit);
         }    
@@ -40,7 +60,7 @@ class DevelopmentApplicantRepository implements DevelopmentApplicantRepositoryIn
 
     public function getById(string $id)
     {
-        $query = Development::where('id', $id);
+        $query = DevelopmentApplicant::where('id', $id);
         return $query->first();
     }
 

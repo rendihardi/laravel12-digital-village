@@ -40,7 +40,8 @@ class DevelopmentController extends Controller implements HasMiddleware
             $developments = $this->developmentRepository->getAll(
                 $request->search,
                 $request->limit,
-                true
+                true,
+                $request->status,
             );
             return ResponseHelper::jsonResponse(true, 'success', DevelopmentResurce::collection($developments), 200);
         } catch (\Exception $e) {
@@ -52,13 +53,15 @@ class DevelopmentController extends Controller implements HasMiddleware
         $request = $request->validate(
             [
                 'search' => 'nullable|string',
-                'rowPerPage' => 'required|integer'
+                'rowPerPage' => 'required|integer',
+                'status' => 'nullable|string'
             ]
         );
         try{
             $developments = $this->developmentRepository->getAllPaginate(
                 $request['search'] ?? null,
-                $request['rowPerPage']
+                $request['rowPerPage'],
+                $request['status'] ?? null,
             );
             return ResponseHelper::jsonResponse(true, 'success', PaginateResource::make($developments, DevelopmentResurce::class), 200);
         

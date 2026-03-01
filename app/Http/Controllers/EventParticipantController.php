@@ -40,7 +40,8 @@ class EventParticipantController extends Controller implements HasMiddleware
             $eventParticipants = $this->eventParticipantRepository->getAll(
                 $request->search,
                 $request->limit,
-                true);
+                true,
+                $request->status,);
             return ResponseHelper::jsonResponse(true, 'success', EventParticipantResource::collection($eventParticipants), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
@@ -51,13 +52,15 @@ class EventParticipantController extends Controller implements HasMiddleware
         $request = $request->validate(
             [
                 'search' => 'nullable|string',
-                'rowPerPage' => 'required|integer'
+                'rowPerPage' => 'required|integer',
+                'status' => 'nullable|string'
             ]
         );
         try{
             $eventParticipants = $this->eventParticipantRepository->getAllPaginate(
                 $request['search'] ?? null,
-                $request['rowPerPage']
+                $request['rowPerPage'],
+                $request['status'] ?? null
             );
             return ResponseHelper::jsonResponse(true, 'success', PaginateResource::make($eventParticipants, EventParticipantResource::class), 200);
         

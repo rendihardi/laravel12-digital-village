@@ -21,7 +21,7 @@ return new class extends Migration
             $table->bigInteger('amount');
             $table->longText('reason');
             $table->string('account_number');
-            $table->string('proof');
+            $table->string('proof')->nullable();
             $table->enum('status',['pending','approved','rejected'])->default('pending');
             $table->softDeletes();
 

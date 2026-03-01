@@ -46,7 +46,10 @@ class SocialAssistanceRecipientRepository implements SocialAssistanceRecipientRe
             $socialAssistanceRecipient->amount = $data['amount'];
             $socialAssistanceRecipient->reason = $data['reason'];
             $socialAssistanceRecipient->account_number = $data['account_number'];
-            $socialAssistanceRecipient->proof = $data['proof']->store('assets/social-assistance-recipients','public');
+            if(isset($data['proof'])){
+                $socialAssistanceRecipient->proof = $data['proof']->store('assets/social-assistance-recipients','public');
+            }
+           
            if(isset($data['status'])){
                 $socialAssistanceRecipient->status = $data['status'];
            }
@@ -71,7 +74,7 @@ class SocialAssistanceRecipientRepository implements SocialAssistanceRecipientRe
        }
     }
 
-    public function update ($id, array $data){
+    public function update (string $id, array $data){
         DB::beginTransaction();
         try{
             $socialAssistanceRecipient = SocialAssistanceRecipient::find($id);

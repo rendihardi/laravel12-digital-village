@@ -23,6 +23,8 @@ class EventParticipantResource extends JsonResource
             'payment_status' => $this->payment_status,
             'event' => new EventResource($this->event),
             'head_of_family' => new HeadOfFamilyResource($this->headOfFamily),
+            'created_at' => $this->created_at,
+            'snap_token'=>$this->snap_token
         ];
     }
 }

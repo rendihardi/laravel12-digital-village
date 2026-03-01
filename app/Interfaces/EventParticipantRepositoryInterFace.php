@@ -8,10 +8,12 @@ interface EventParticipantRepositoryInterFace
     public function getAll( 
         ?string $search,
         ?int $limit,
-        bool $excecute);
+        bool $excecute,
+        ?string $status);
     public function getAllPaginate(
           ?string $search,
-        ?int $rowPerPage);
+        ?int $rowPerPage,
+        ?string $status);
     public function getById(string $id);
     public function update(string $id, array $data);
     public function delete(string $id);

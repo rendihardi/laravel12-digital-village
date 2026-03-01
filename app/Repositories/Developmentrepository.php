@@ -4,18 +4,34 @@ namespace App\Repositories;
 
 use App\Interfaces\DevelopmentRepositoryInterface;
 use App\Models\Development;
+use App\Models\FamilyMember;
 use Illuminate\Support\Facades\DB;
 
 class DevelopmentRepository implements DevelopmentRepositoryInterface
 {
-    public function getAll($search = null, $limit = null, $excecute = false)
+    public function getAll($search = null, $limit = null, $excecute = false, $status = null)
     {
-        $query = Development::with('developmentApplicants');
+        $query = Development::with('developmentApplicants')->orderBy('created_at', 'desc');;
         
         if ($search) {
             $query->search($search);
         }
         $query->orderBy('created_at', 'desc');
+        
+        if ($status === 'my-applications') {
+    $query->whereHas('developmentApplicants', function ($query) {
+        $members = FamilyMember::where(
+                'head_of_family_id',
+                auth()->user()->headOfFamily->id
+            )
+            ->pluck('user_id')
+            ->toArray();
+
+        $members[] = auth()->user()->id;
+
+        $query->whereIn('user_id', $members);
+    });
+}
         if ($limit) {
             $query->limit($limit);
         }    
@@ -26,9 +42,9 @@ class DevelopmentRepository implements DevelopmentRepositoryInterface
         
     }
 
-    public function getAllPaginate($search = null, $rowPerPage = null)
+    public function getAllPaginate($search = null, $rowPerPage = null, $status = null)
     {
-        $query = $this->getAll($search, $rowPerPage, false);
+        $query = $this->getAll($search, $rowPerPage, false, $status);
         return $query->paginate($rowPerPage);
     }
 
